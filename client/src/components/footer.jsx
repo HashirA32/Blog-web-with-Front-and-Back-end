@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-600 py-3 mt-2 border-t">
+    <footer className="py-3 mt-2 border-t">
       <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center text-sm">
-        <p>&copy; {new Date().getFullYear()} HA-Blogs. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} HA-Blog. All rights reserved.</p>
         <div className="flex space-x-4 sm:mt-0">
           <Link to="" className="hover:text-amber-500 transition">
             Privacy

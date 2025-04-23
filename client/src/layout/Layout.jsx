@@ -11,9 +11,8 @@ const Layout = () => {
       <SidebarProvider>
         <Topbar />
         <AppSidebar />
-        <main className="w-full border border-amber-700">
-          <div className="w-full h-auto min-h-[calc(100dvh-60px)]">
-            Hi
+        <main className="w-full">
+          <div className="w-full h-auto min-h-[calc(100dvh-55px)]">
             <Outlet />
           </div>
           <Footer />

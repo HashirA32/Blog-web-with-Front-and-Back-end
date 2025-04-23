@@ -20,9 +20,7 @@ const AppSidebar = () => {
   return (
     <Sidebar>
       <SidebarHeader>
-        <div className="text-2xl font-extrabold font-sans tracking-tight h-12">
-          HA-Blogs
-        </div>
+        <div className="text-2xl font-extrabold font-sans tracking-tight h-12"></div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
