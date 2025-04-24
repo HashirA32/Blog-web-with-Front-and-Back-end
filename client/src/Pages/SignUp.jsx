@@ -1,5 +1,5 @@
 "use client";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -15,21 +15,26 @@ import { Input } from "@/components/ui/input";
 import React from "react";
 import { z } from "zod";
 import { Card } from "@/components/ui/card";
-import { RouteSignUp } from "@/components/Helper/RouteNames";
+import { RouteSignIn, RouteSignUp } from "@/components/Helper/RouteNames";
+import { getEnv } from "@/components/Helper/getenv";
+import { showToast } from "@/components/Helper/showToast";
 zodResolver;
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const formSchema = z.object({
-    name: z.string().min(3, "Name must be 3 characters long."),
-    email: z.string().email,
-    password: z.string().min(8, "Password must be 8 characters long."),
+    name: z.string().min(3, "Name must be at least 3 character long."),
+    email: z.string().email(),
+    password: z.string().min(8, "Password must be at least 8 character long"),
     confirmPassword: z
       .string()
       .refine(
         (data) => data.password === data.confirmPassword,
-        "Password and Confirm Password Must be same."
+        "Password and confirm password should be same."
       ),
   });
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,8 +44,27 @@ const SignUp = () => {
       confirmPassword: "",
     },
   });
-  function onSubmit(values) {
-    console.log(values);
+
+  async function onSubmit(values) {
+    try {
+      const response = await fetch(
+        `${getEnv("VITE_API_BASE_URL")}/auth/register`,
+        {
+          method: "post",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(values),
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        return showToast("error", data.message);
+      }
+
+      navigate(RouteSignIn);
+      showToast("success", data.message);
+    } catch (error) {
+      showToast("error", error.message);
+    }
   }
   return (
     <div className="flex justify-center items-center h-screen w-screen  ">
@@ -120,10 +144,10 @@ const SignUp = () => {
               <div className="text-sm mt-5 flex justify-center items-center gap-2">
                 <p>Already have accoount</p>
                 <Link
-                  to={RouteSignUp}
+                  to={RouteSignIn}
                   className="text-orange-800 font-semibold hover:text-orange-600"
                 >
-                  SingUp
+                  SingIn
                 </Link>
               </div>
             </div>
