@@ -16,6 +16,10 @@ app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true
 }))
+app.use((req, res, next) => {
+    res.removeHeader('Cross-Origin-Opener-Policy');
+    next();
+});
 
 app.use('/api/auth', AuthRoute)
 

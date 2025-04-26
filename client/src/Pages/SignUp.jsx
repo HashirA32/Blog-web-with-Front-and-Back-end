@@ -18,6 +18,7 @@ import { Card } from "@/components/ui/card";
 import { RouteSignIn, RouteSignUp } from "@/components/Helper/RouteNames";
 import { getEnv } from "@/components/Helper/getenv";
 import { showToast } from "@/components/Helper/showToast";
+import GoogleLogin from "@/components/GoogleLogin";
 zodResolver;
 
 const SignUp = () => {
@@ -72,6 +73,12 @@ const SignUp = () => {
         <h1 className="text-2xl font-bold text-center mb-5">
           Create new Account
         </h1>
+        <div>
+          <GoogleLogin />
+          <div className="border mt-5 flex justify-center items-center">
+            <span className="absolute font-bold">OR</span>
+          </div>
+        </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="mb-3">
