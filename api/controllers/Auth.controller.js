@@ -65,7 +65,7 @@ export const LogIn = async (req, res, next) => {
     delete newUser.password;
     res.status(200).json({
       success: true,
-      newUser,
+      user: newUser,
       message: "LogIn successful.",
     });
   } catch (error) {
@@ -112,8 +112,29 @@ export const GoogleLogIn = async (req, res, next) => {
     delete newUser.password;
     res.status(200).json({
       success: true,
-      newUser,
+      user: newUser,
       message: "LogIn successful.",
+    });
+  } catch (error) {
+    next(handleError(500, error.message));
+  }
+};
+
+
+
+export const Loguot = async (req, res, next) => {
+  try {
+    res.clearCookie("access_token",{
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      path: "/",
+    });
+
+   
+    res.status(200).json({
+      success: true,
+      message: "Logout successful.",
     });
   } catch (error) {
     next(handleError(500, error.message));

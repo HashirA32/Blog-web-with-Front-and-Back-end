@@ -18,8 +18,12 @@ import { Card } from "@/components/ui/card";
 import { RouteIndex, RouteSignUp } from "@/components/Helper/RouteNames";
 import { showToast } from "@/components/Helper/showToast";
 import { getEnv } from "@/components/Helper/getenv";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/user/user.slice";
+import GoogleLogin from "@/components/GoogleLogin";
 zodResolver;
 const SignIn = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const formSchema = z.object({
     email: z.string().email("Invalid email address."),
@@ -48,7 +52,7 @@ const SignIn = () => {
       if (!response.ok) {
         return showToast("error", data.message);
       }
-
+      dispatch(setUser(data.user));
       navigate(RouteIndex);
       showToast("success", data.message);
     } catch (error) {
@@ -61,6 +65,12 @@ const SignIn = () => {
         <h1 className="text-2xl font-bold text-center mb-5">
           LogIn into Account
         </h1>
+        <div>
+          <GoogleLogin />
+          <div className="border mt-5 flex justify-center items-center">
+            <span className="absolute font-bold">OR</span>
+          </div>
+        </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="mb-3">
