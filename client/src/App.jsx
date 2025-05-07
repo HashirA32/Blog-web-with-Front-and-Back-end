@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   RouteAddCategory,
+  RouteBlog,
+  RouteBlogAdd,
+  RouteBlogDetails,
+  RouteBlogEdit,
   RouteCategoryDetails,
   RouteEditCategory,
   RouteIndex,
@@ -17,6 +21,10 @@ import Profile from "./Pages/Profile";
 import CategoryDetails from "./Pages/Category/CategoryDetails";
 import AddCategory from "./Pages/Category/AddCategory";
 import EditCategory from "./Pages/Category/EditCategory";
+import BlogDetails from "./Pages/Blogs/BlogDetails";
+import AddBlog from "./Pages/Blogs/AddBlog";
+import EditBlog from "./Pages/Blogs/EditBlog";
+import SingleBlogDetail from "./Pages/SingleBlogDetail";
 
 function App() {
   return (
@@ -27,13 +35,21 @@ function App() {
             <Route path={RouteIndex} element={<Layout />}>
               <Route index element={<Index />} />
               <Route path={RouteProfile} element={<Profile />} />
+              {/* Route Category */}
               <Route
                 path={RouteCategoryDetails}
                 element={<CategoryDetails />}
               />
               <Route path={RouteAddCategory} element={<AddCategory />} />
               <Route path={RouteEditCategory()} element={<EditCategory />} />
+              {/* Route Blog */}
+
+              <Route path={RouteBlog} element={<BlogDetails />} />
+              <Route path={RouteBlogAdd} element={<AddBlog />} />
+              <Route path={RouteBlogEdit()} element={<EditBlog />} />
+              <Route path={RouteBlogDetails()} element={<SingleBlogDetail />} />
             </Route>
+
             <Route path={RouteSignUp} element={<SignUp />} />
             <Route path={RouteSignIn} element={<SignIn />} />
           </Routes>

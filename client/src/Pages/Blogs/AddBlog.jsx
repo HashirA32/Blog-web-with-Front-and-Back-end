@@ -1,0 +1,233 @@
+import React from "react";
+("use client");
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { z } from "zod";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useEffect } from "react";
+import slugify from "slugify";
+import { showToast } from "@/components/Helper/showToast";
+import { getEnv } from "@/components/Helper/getenv";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useFetch } from "@/hooks/UseFetch";
+import Dropzone from "react-dropzone";
+import { useState } from "react";
+import Editer from "@/components/Editer";
+import { useSelector } from "react-redux";
+import { RouteBlog } from "@/components/Helper/RouteNames";
+import { useNavigate } from "react-router-dom";
+
+const AddBlog = () => {
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+
+  const [filePreview, setPreview] = useState();
+  const [file, setFile] = useState();
+  const {
+    data: CategoryData,
+    loading,
+    error,
+  } = useFetch(`${getEnv("VITE_API_BASE_URL")}/category/all-categories`, {
+    method: "get",
+    Credential: "include",
+  });
+  const formSchema = z.object({
+    category: z.string().min(3, "Category must be at least 3 character long."),
+    title: z.string().min(3, "Title must be at least 3 character long."),
+    slug: z.string().min(3, "Slug must be at least 3 character long."),
+    blogContent: z
+      .string()
+      .min(50, "Blog Content must be at least 50 character long."),
+  });
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      category: "",
+      title: "",
+      slug: "",
+      blogContent: "",
+    },
+  });
+  const handleEditerData = (event, editor) => {
+    const data = editor.getData();
+    form.setValue("blogContent", data);
+  };
+  const blogTitle = form.watch("title");
+  useEffect(() => {
+    if (blogTitle) {
+      const slug = slugify(blogTitle, { lower: true });
+      form.setValue("slug", slug);
+    }
+  }, [blogTitle]);
+  async function onSubmit(values) {
+    try {
+      const newValues = { ...values, auther: user.user._id };
+      console.log(newValues);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("data", JSON.stringify(newValues));
+
+      const response = await fetch(`${getEnv("VITE_API_BASE_URL")}/blog/add`, {
+        method: "post",
+        credentials: "include",
+        body: formData,
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        return showToast("error", data.message);
+      }
+      form.reset();
+      setFile();
+      setPreview();
+      navigate(RouteBlog);
+      showToast("success", data.message);
+    } catch (error) {
+      showToast("error", error.message);
+    }
+  }
+  const handleFileSelection = (files) => {
+    const file = files[0];
+    const preview = URL.createObjectURL(file);
+    setFile(file);
+    setPreview(preview);
+  };
+  return (
+    <div className="flex justify-center">
+      <Card className="p-5 w-full max-w-4xl">
+        <CardHeader className="text-3xl font-semibold">
+          Add a new Blog
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <div className="mb-3">
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Category</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValues={field.value}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Category" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {CategoryData &&
+                              CategoryData.categories.length > 0 &&
+                              CategoryData.categories.map((category) => (
+                                <SelectItem
+                                  key={category._id}
+                                  value={category._id}
+                                >
+                                  {category.name}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="mb-3">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tilte</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter Blog title" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="mb-3">
+                <FormField
+                  control={form.control}
+                  name="slug"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Slug</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter slug" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="mb-3">
+                <span className="block my-2">Featured Image</span>
+                <Dropzone
+                  onDrop={(acceptedFiles) => handleFileSelection(acceptedFiles)}
+                >
+                  {({ getRootProps, getInputProps }) => (
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <div className="flex justify-center items-center w-32 h-28 border-2 border-dotted rounded">
+                        <img src={filePreview} alt="" />
+                      </div>
+                    </div>
+                  )}
+                </Dropzone>
+              </div>
+
+              <div className="mb-5 ">
+                <FormField
+                  control={form.control}
+                  name="blogContent"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Blog Content</FormLabel>
+                      <FormControl>
+                        <Editer
+                          props={{
+                            initialData: "",
+                            onChange: handleEditerData,
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <Button type="submit" className="w-full">
+                Save
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default AddBlog;

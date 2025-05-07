@@ -6,6 +6,7 @@ import mongoose from 'mongoose'
 import AuthRoute from './routes/Auth.route.js'
 import UserRoute from './routes/UserRoute.js'
 import CategoryRoute from './routes/category.route.js'
+import BlogRoute from './routes/blog.route.js'
 
 dotenv.config()
 
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 app.use('/api/auth', AuthRoute)
 app.use('/api/user', UserRoute)
 app.use('/api/category', CategoryRoute)
+app.use('/api/blog', BlogRoute)
 
 
 mongoose.connect(process.env.MONGODB_CONN,{dbName:'mern-blog'})

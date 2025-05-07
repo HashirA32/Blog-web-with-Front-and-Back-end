@@ -15,9 +15,18 @@ import { BiCategory } from "react-icons/bi";
 import { FaRegComments } from "react-icons/fa";
 import { ImBlog } from "react-icons/im";
 import { FiUsers } from "react-icons/fi";
-import { RouteCategoryDetails } from "./Helper/RouteNames";
+import { RouteBlog, RouteCategoryDetails } from "./Helper/RouteNames";
+import { useFetch } from "@/hooks/UseFetch";
+import { getEnv } from "./Helper/getenv";
 
 const AppSidebar = () => {
+  const { data: CategoryData } = useFetch(
+    `${getEnv("VITE_API_BASE_URL")}/category/all-categories`,
+    {
+      method: "get",
+      Credential: "include",
+    }
+  );
   return (
     <Sidebar>
       <SidebarHeader>
@@ -41,7 +50,7 @@ const AppSidebar = () => {
             <SidebarMenuItem>
               <SidebarMenuButton>
                 <ImBlog />
-                <Link to="/blogs">Blogs</Link>
+                <Link to={RouteBlog}>Blogs</Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
@@ -63,12 +72,16 @@ const AppSidebar = () => {
           <SidebarGroupLabel>Categories</SidebarGroupLabel>
 
           <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <IoHomeOutline />
-                <Link> Catagory Item</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            {CategoryData &&
+              CategoryData.categories.length > 0 &&
+              CategoryData.categories.map((category) => (
+                <SidebarMenuItem key={category._id}>
+                  <SidebarMenuButton>
+                    <IoHomeOutline />
+                    <Link>{category.name}</Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
