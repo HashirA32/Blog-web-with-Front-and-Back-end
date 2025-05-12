@@ -126,6 +126,8 @@
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+  color: var(--color-background);
+  background-color: var(--color-background);
 }
 
 .ck-content {
@@ -137,17 +139,19 @@
 .editor-container_classic-editor .editor-container__editor {
   min-width: 795px;
   max-width: 795px;
+  background-color: var(--background);
 }
 
 .editor-container_include-block-toolbar {
   margin-left: 42px;
+  background-color: var(--background);
 }
 
 .ck-content h3.category {
   font-family: "Oswald";
   font-size: 20px;
   font-weight: bold;
-  color: #555;
+  background-color: var(--background);
   letter-spacing: 10px;
   margin: 0;
   padding: 0;
@@ -160,12 +164,13 @@
   margin: 0;
   padding: 0;
   border: 0;
+  background-color: var(--background);
 }
 
 .ck-content h3.document-subtitle {
   font-family: "Oswald";
   font-size: 20px;
-  color: #555;
+  background-color: var(--background);
   margin: 0 0 1em;
   font-weight: bold;
   padding: 0;
@@ -204,7 +209,6 @@
 
 .ck-content span.spoiler:hover {
   background: #000;
-  color: #fff;
 }
 
 .ck-content .button {
@@ -213,7 +217,7 @@
   border-radius: 8px;
   margin: 0 auto;
   padding: 12px;
-  color: #ffffff;
+
   font-size: 24px;
   font-weight: 700;
   text-align: center;
@@ -254,4 +258,60 @@
   .ck-editor
   .ck-editor__editable {
   border-radius: 0;
+}
+
+@keyframes before8 {
+  0% {
+    width: 0.5em;
+    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75),
+      -1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+  35% {
+    width: 2.5em;
+    box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75),
+      0 0.5em rgba(111, 202, 220, 0.75);
+  }
+  70% {
+    width: 0.5em;
+    box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75),
+      1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+  100% {
+    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75),
+      -1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+}
+
+@keyframes after6 {
+  0% {
+    height: 0.5em;
+    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75),
+      -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+  35% {
+    height: 2.5em;
+    box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75),
+      -0.5em 0 rgba(233, 169, 32, 0.75);
+  }
+  70% {
+    height: 0.5em;
+    box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75),
+      -0.5em 1em rgba(233, 169, 32, 0.75);
+  }
+  100% {
+    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75),
+      -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+}
+
+@layer utilities {
+  .animate-before8 {
+    animation: before8 2s infinite;
+    transform: translate(-50%, -50%);
+  }
+
+  .animate-after6 {
+    animation: after6 2s infinite;
+    transform: translate(-50%, -50%);
+  }
 }

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSelector } from "react-redux";
-import userImg from "@/assets/images/user.png";
+import UserIcon from "@/assets/images/user.png";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -77,7 +77,7 @@ const Topbar = () => {
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Avatar>
-                <AvatarImage src={user.user.avatar || userImg} />
+                <AvatarImage src={user.user.avatar || UserIcon} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>

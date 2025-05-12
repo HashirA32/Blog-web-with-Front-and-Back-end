@@ -17,7 +17,7 @@ const Index = () => {
   return (
     <div className="grid grid-cols-3 gap-10">
       {blogData && blogData.blog.length > 0 ? (
-        blogData.blog.map((blog) => <BlogCard props={blog} />)
+        blogData.blog.map((blog) => <BlogCard props={blog} key={blog._id} />)
       ) : (
         <div>Blogs related data not found</div>
       )}

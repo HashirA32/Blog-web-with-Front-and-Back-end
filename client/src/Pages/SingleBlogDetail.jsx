@@ -12,14 +12,16 @@ import moment from "moment";
 import Comments from "@/components/Comments";
 import CommentCounter from "@/components/CommentCounter";
 import LikeCount from "@/components/LikeCount";
+import RelatedBlog from "@/components/RelatedBlog";
 const SingleBlogDetail = () => {
-  const { blog } = useParams();
+  const { blog, category } = useParams();
   const { data, loading, error } = useFetch(
     `${getEnv("VITE_API_BASE_URL")}/blog/get-blog/${blog}`,
     {
       method: "get",
       Credential: "include",
-    }
+    },
+    [blog, category]
   );
 
   let htmlContent = "";
@@ -76,7 +78,9 @@ const SingleBlogDetail = () => {
           </>
         )}
 
-        <div className="border rounded w-[30%] h-40"></div>
+        <div className="border rounded w-[30%]">
+          <RelatedBlog props={{ category: category, currentBlog: blog }} />
+        </div>
       </div>
     </>
   );

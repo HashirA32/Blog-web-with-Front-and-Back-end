@@ -15,7 +15,11 @@ import { BiCategory } from "react-icons/bi";
 import { FaRegComments } from "react-icons/fa";
 import { ImBlog } from "react-icons/im";
 import { FiUsers } from "react-icons/fi";
-import { RouteBlog, RouteCategoryDetails } from "./Helper/RouteNames";
+import {
+  RouteBlog,
+  RouteBlogByCategory,
+  RouteCategoryDetails,
+} from "./Helper/RouteNames";
 import { useFetch } from "@/hooks/UseFetch";
 import { getEnv } from "./Helper/getenv";
 
@@ -78,7 +82,9 @@ const AppSidebar = () => {
                 <SidebarMenuItem key={category._id}>
                   <SidebarMenuButton>
                     <IoHomeOutline />
-                    <Link>{category.name}</Link>
+                    <Link to={RouteBlogByCategory(category.slug)}>
+                      {category.name}
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

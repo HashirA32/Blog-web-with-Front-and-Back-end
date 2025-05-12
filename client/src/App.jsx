@@ -3,6 +3,7 @@ import {
   RouteAddCategory,
   RouteBlog,
   RouteBlogAdd,
+  RouteBlogByCategory,
   RouteBlogDetails,
   RouteBlogEdit,
   RouteCategoryDetails,
@@ -25,6 +26,7 @@ import BlogDetails from "./Pages/Blogs/BlogDetails";
 import AddBlog from "./Pages/Blogs/AddBlog";
 import EditBlog from "./Pages/Blogs/EditBlog";
 import SingleBlogDetail from "./Pages/SingleBlogDetail";
+import BlogByCategory from "./Pages/Blogs/BlogByCategory";
 
 function App() {
   return (
@@ -48,6 +50,10 @@ function App() {
               <Route path={RouteBlogAdd} element={<AddBlog />} />
               <Route path={RouteBlogEdit()} element={<EditBlog />} />
               <Route path={RouteBlogDetails()} element={<SingleBlogDetail />} />
+              <Route
+                path={RouteBlogByCategory()}
+                element={<BlogByCategory />}
+              />
             </Route>
 
             <Route path={RouteSignUp} element={<SignUp />} />
