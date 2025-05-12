@@ -52,11 +52,12 @@ const Topbar = () => {
   return (
     <nav className="w-full  flex items-center justify-between px-6 py-3 shadow-sm h-16 fixed z-50 border-b bg-background/10 backdrop-blur top-0 ">
       {/* Logo */}
-      <div className="flex items-center space-x-2 font-bold text-xl">
-        <span className="text-orange-500 text-2xl">HA</span>
-        <span>BLOG</span>
-      </div>
-
+      <Link to={RouteIndex}>
+        <div className="flex items-center space-x-2 font-bold text-xl">
+          <span className="text-orange-500 text-2xl">HA</span>
+          <span>BLOG</span>
+        </div>
+      </Link>
       {/* Search */}
       <div className="w-full max-w-md mx-4">
         <SearchBar />

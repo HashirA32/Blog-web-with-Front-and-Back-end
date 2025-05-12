@@ -9,6 +9,9 @@ import UserIcon from "@/assets/images/user.png";
 import { marked } from "marked";
 import { decodeXML } from "entities";
 import moment from "moment";
+import Comments from "@/components/Comments";
+import CommentCounter from "@/components/CommentCounter";
+import LikeCount from "@/components/LikeCount";
 const SingleBlogDetail = () => {
   const { blog } = useParams();
   const { data, loading, error } = useFetch(
@@ -18,7 +21,7 @@ const SingleBlogDetail = () => {
       Credential: "include",
     }
   );
-  console.log(data);
+
   let htmlContent = "";
   if (data && data.blog && data.blog.blogContent) {
     const content = decodeXML(data.blog.blogContent);
@@ -32,16 +35,26 @@ const SingleBlogDetail = () => {
           <>
             <div className="border rounded w-[70%]  p-5">
               <h1 className="text-2xl font-bold">{data.blog.title}</h1>
-              <div className="flex flex-col justify-start items-start font-semibold">
-                <div className="flex  justify-start items-center gap-2 pt-2">
-                  <Avatar>
-                    <AvatarImage src={data.blog.auther.avatar || UserIcon} />
-                  </Avatar>
-                  <span className="text-xl">{data.blog.auther.name}</span>
+              <div className="flex items-baseline justify-between px-2">
+                <div>
+                  <div className="flex flex-col justify-start items-start font-semibold">
+                    <div className="flex  justify-start items-center gap-2 pt-2">
+                      <Avatar>
+                        <AvatarImage
+                          src={data.blog.auther.avatar || UserIcon}
+                        />
+                      </Avatar>
+                      <span className="text-xl">{data.blog.auther.name}</span>
+                    </div>
+                    <div className="text-xs">
+                      <span>Created At : </span>
+                      {moment(data.blog.createdAt).format("DD-MM-YYYY")}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-xs">
-                  <span>Created At : </span>
-                  {moment(data.blog.createdAt).format("DD-MM-YYYY")}
+                <div className="flex items-baseline justify-between gap-2">
+                  <LikeCount props={{ blogid: data.blog._id }} />
+                  <CommentCounter props={{ blogid: data.blog._id }} />
                 </div>
               </div>
               <div className="py-5">
@@ -56,6 +69,9 @@ const SingleBlogDetail = () => {
                   __html: htmlContent, // Render the converted HTML
                 }}
               ></div>
+              <div className="border-t mt-5 pt-5">
+                <Comments props={{ blogid: data.blog._id }} />
+              </div>
             </div>
           </>
         )}
