@@ -166,3 +166,17 @@ export const getBlogByCategory = async (req, res, next)=> {
         next(handleError(500,error.message))
     }
 }
+
+
+export const search = async (req, res, next)=> {
+    try {
+        const {q} = req.query 
+        console.log(q)
+        const blog = await Blog.find({title: {$regex: q, $options:'i'}}).populate('auther', 'name avatar role').populate('category', 'name slug').sort({createdAt: -1}).lean().exec()
+        res.status(200).json({
+            blog
+        })
+    } catch (error) {
+        next(handleError(500,error.message))
+    }
+}

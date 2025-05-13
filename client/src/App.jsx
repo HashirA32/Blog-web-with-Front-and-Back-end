@@ -6,7 +6,9 @@ import {
   RouteBlogByCategory,
   RouteBlogDetails,
   RouteBlogEdit,
+  RouteBlogSearch,
   RouteCategoryDetails,
+  RouteComment,
   RouteEditCategory,
   RouteIndex,
   RouteProfile,
@@ -27,6 +29,8 @@ import AddBlog from "./Pages/Blogs/AddBlog";
 import EditBlog from "./Pages/Blogs/EditBlog";
 import SingleBlogDetail from "./Pages/SingleBlogDetail";
 import BlogByCategory from "./Pages/Blogs/BlogByCategory";
+import SearchResult from "./Pages/SearchResult";
+import Comment from "./Pages/Comment";
 
 function App() {
   return (
@@ -42,6 +46,7 @@ function App() {
                 path={RouteCategoryDetails}
                 element={<CategoryDetails />}
               />
+              <Route path={RouteComment} element={<Comment />} />
               <Route path={RouteAddCategory} element={<AddCategory />} />
               <Route path={RouteEditCategory()} element={<EditCategory />} />
               {/* Route Blog */}
@@ -54,6 +59,7 @@ function App() {
                 path={RouteBlogByCategory()}
                 element={<BlogByCategory />}
               />
+              <Route path={RouteBlogSearch()} element={<SearchResult />} />
             </Route>
 
             <Route path={RouteSignUp} element={<SignUp />} />

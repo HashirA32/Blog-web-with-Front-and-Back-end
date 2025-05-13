@@ -3,6 +3,8 @@ export const RouteSignUp = "/sign-up";
 export const RouteSignIn = "/sign-in";
 export const RouteProfile = "/profile";
 export const RouteCategoryDetails = "/categories";
+export const RouteComment = "/comment";
+export const RouteUser = "/user";
 export const RouteAddCategory = "/categories/add";
 export const RouteEditCategory = (category_id) => {
   if (category_id) {
@@ -34,5 +36,12 @@ export const RouteBlogByCategory = (category) => {
     return "/blog/:category";
   } else {
     return `/blog/${category}`;
+  }
+};
+export const RouteBlogSearch = (q) => {
+  if (q) {
+    return `/search?q=${q}`;
+  } else {
+    return "/search";
   }
 };

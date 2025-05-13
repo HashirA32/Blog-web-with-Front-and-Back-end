@@ -19,6 +19,7 @@ import {
   RouteBlog,
   RouteBlogByCategory,
   RouteCategoryDetails,
+  RouteComment,
 } from "./Helper/RouteNames";
 import { useFetch } from "@/hooks/UseFetch";
 import { getEnv } from "./Helper/getenv";
@@ -60,7 +61,7 @@ const AppSidebar = () => {
             <SidebarMenuItem>
               <SidebarMenuButton>
                 <FaRegComments />
-                <Link to="/comments">Comments</Link>
+                <Link to={RouteComment}>Comments</Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
