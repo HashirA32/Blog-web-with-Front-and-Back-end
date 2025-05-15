@@ -14,6 +14,7 @@ import {
   RouteProfile,
   RouteSignIn,
   RouteSignUp,
+  RouteUser,
 } from "./components/Helper/RouteNames";
 import Layout from "./layout/Layout";
 import Index from "./Pages/Index";
@@ -31,6 +32,7 @@ import SingleBlogDetail from "./Pages/SingleBlogDetail";
 import BlogByCategory from "./Pages/Blogs/BlogByCategory";
 import SearchResult from "./Pages/SearchResult";
 import Comment from "./Pages/Comment";
+import User from "./Pages/User";
 
 function App() {
   return (
@@ -47,6 +49,7 @@ function App() {
                 element={<CategoryDetails />}
               />
               <Route path={RouteComment} element={<Comment />} />
+              <Route path={RouteUser} element={<User />} />
               <Route path={RouteAddCategory} element={<AddCategory />} />
               <Route path={RouteEditCategory()} element={<EditCategory />} />
               {/* Route Blog */}
