@@ -36,82 +36,84 @@ const AppSidebar = () => {
     }
   );
   return (
-    <Sidebar>
-      <SidebarHeader>
-        <div className="text-2xl font-extrabold font-sans tracking-tight h-12"></div>
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <IoHomeOutline />
-                <Link to="/"> Home</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+    <>
+      <Sidebar collapsible="icon">
+        <SidebarHeader>
+          <div className="text-2xl font-extrabold font-sans tracking-tight h-12"></div>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <IoHomeOutline />
+                  <Link to="/"> Home</Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
 
-            {user && user.isLoggedIn ? (
-              <>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>
-                    <ImBlog />
-                    <Link to={RouteBlog}>Blogs</Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>
-                    <FaRegComments />
-                    <Link to={RouteComment}>Comments</Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </>
-            ) : (
-              <></>
-            )}
+              {user && user.isLoggedIn ? (
+                <>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <ImBlog />
+                      <Link to={RouteBlog}>Blogs</Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <FaRegComments />
+                      <Link to={RouteComment}>Comments</Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </>
+              ) : (
+                <></>
+              )}
 
-            {user && user.user.role === "admin" ? (
-              <>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>
-                    <BiCategory />
-                    <Link to={RouteCategoryDetails}>Categories</Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+              {user && user.user.role === "admin" ? (
+                <>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <BiCategory />
+                      <Link to={RouteCategoryDetails}>Categories</Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
 
-                <SidebarMenuItem>
-                  <SidebarMenuButton>
-                    <FiUsers />
-                    <Link to={RouteUser}>User</Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </>
-            ) : (
-              <></>
-            )}
-          </SidebarMenu>
-        </SidebarGroup>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <FiUsers />
+                      <Link to={RouteUser}>User</Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </>
+              ) : (
+                <></>
+              )}
+            </SidebarMenu>
+          </SidebarGroup>
 
-        <SidebarGroup>
-          <SidebarGroupLabel>Categories</SidebarGroupLabel>
+          <SidebarGroup>
+            <SidebarGroupLabel>Categories</SidebarGroupLabel>
 
-          <SidebarMenu>
-            {CategoryData &&
-              CategoryData.categories.length > 0 &&
-              CategoryData.categories.map((category) => (
-                <SidebarMenuItem key={category._id}>
-                  <SidebarMenuButton>
-                    <BiCategory />
-                    <Link to={RouteBlogByCategory(category.slug)}>
-                      {category.name}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-          </SidebarMenu>
-        </SidebarGroup>
-      </SidebarContent>
-      <SidebarFooter />
-    </Sidebar>
+            <SidebarMenu>
+              {CategoryData &&
+                CategoryData.categories.length > 0 &&
+                CategoryData.categories.map((category) => (
+                  <SidebarMenuItem key={category._id}>
+                    <SidebarMenuButton>
+                      <BiCategory />
+                      <Link to={RouteBlogByCategory(category.slug)}>
+                        {category.name}
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+            </SidebarMenu>
+          </SidebarGroup>
+        </SidebarContent>
+        <SidebarFooter />
+      </Sidebar>
+    </>
   );
 };
 

@@ -15,7 +15,7 @@ const Index = () => {
   });
   if (loading) return <Loading />;
   return (
-    <div className="grid grid-cols-3 gap-10">
+    <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-10 md:gap-3">
       {blogData && blogData.blog.length > 0 ? (
         blogData.blog.map((blog) => <BlogCard props={blog} key={blog._id} />)
       ) : (

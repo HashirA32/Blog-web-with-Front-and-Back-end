@@ -29,12 +29,17 @@ const ShowComments = ({ props }) => {
         </CardHeader>
         {props.newComment && (
           <Card>
-            <CardHeader>
-              <div className="flex justify-baseline items-center gap-2 ">
+            <CardHeader className="md:p-0">
+              <div className="flex justify-baseline items-center gap-2 md:gap-0 ">
                 <Avatar>
-                  <AvatarImage src={user?.user.avatar || usericon} />
+                  <AvatarImage
+                    className="md:w-[30px] md:h-[10px]"
+                    src={user?.user.avatar || usericon}
+                  />
                 </Avatar>
-                <span className="font-semibold">{user?.user.name}</span>
+                <span className="font-semibold md:text-2xl">
+                  {user?.user.name}
+                </span>
               </div>
             </CardHeader>
             <CardContent>{props.newComment.comment}</CardContent>
@@ -46,8 +51,8 @@ const ShowComments = ({ props }) => {
             return (
               <Card key={comment._id} className="mx-4">
                 <CardHeader>
-                  <div className="flex justify-between items-baseline gap-2 ">
-                    <div className="flex  justify-baseline items-center gap-2 ">
+                  <div className="flex md:flex-col justify-between items-baseline gap-2 ">
+                    <div className="flex md:flex-col justify-baseline items-center gap-2 ">
                       <Avatar>
                         <AvatarImage src={comment.user.avatar || usericon} />
                       </Avatar>

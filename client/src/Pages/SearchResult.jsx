@@ -24,7 +24,7 @@ const SearchResult = () => {
       <div className="flex items-center gap-2 text-2xl font-bold border-b pb-2 mb-5 text-orange-400">
         Search Reasults for : {q}
       </div>
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
         {blogData && blogData.blog.length > 0 ? (
           blogData.blog.map((blog) => <BlogCard key={blog._id} props={blog} />)
         ) : (

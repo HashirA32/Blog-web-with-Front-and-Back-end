@@ -63,7 +63,7 @@ const Comments = ({ props }) => {
   }
   return (
     <div>
-      <h2 className="flex items-center gap-1 font-bold py-5 text-2xl">
+      <h2 className="flex items-center gap-1 font-bold py-5 text-2xl md:text">
         <FaComments className="text-orange-500" />
         Add a Comment
       </h2>
@@ -96,7 +96,7 @@ const Comments = ({ props }) => {
           <Link to={RouteSignIn}>Sign In</Link>
         </Button>
       )}
-      <div className=" mt-5">
+      <div className=" mt-5 ">
         <ShowComments props={{ blogid: props.blogid, newComment }} />
       </div>
     </div>
