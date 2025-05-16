@@ -62,6 +62,14 @@ const SignIn = () => {
   return (
     <div className="flex justify-center items-center h-screen w-screen">
       <Card className="p-5 w-[300px]">
+        <div className="flex justify-center items-center border-b pb-5">
+          <Link to={RouteIndex}>
+            <div className="flex items-center space-x-2 font-bold text-xl">
+              <span className="text-orange-500 text-2xl">HA</span>
+              <span>BLOG</span>
+            </div>
+          </Link>
+        </div>
         <h1 className="text-2xl font-bold text-center mb-5">
           LogIn into Account
         </h1>

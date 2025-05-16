@@ -33,6 +33,8 @@ import BlogByCategory from "./Pages/Blogs/BlogByCategory";
 import SearchResult from "./Pages/SearchResult";
 import Comment from "./Pages/Comment";
 import User from "./Pages/User";
+import AuthRouteProtection from "./components/AuthRouteProtection";
+import OnlyAdminAllow from "./components/OnlyAdminAllow";
 
 function App() {
   return (
@@ -42,27 +44,30 @@ function App() {
           <Routes>
             <Route path={RouteIndex} element={<Layout />}>
               <Route index element={<Index />} />
-              <Route path={RouteProfile} element={<Profile />} />
-              {/* Route Category */}
-              <Route
-                path={RouteCategoryDetails}
-                element={<CategoryDetails />}
-              />
-              <Route path={RouteComment} element={<Comment />} />
-              <Route path={RouteUser} element={<User />} />
-              <Route path={RouteAddCategory} element={<AddCategory />} />
-              <Route path={RouteEditCategory()} element={<EditCategory />} />
-              {/* Route Blog */}
-
-              <Route path={RouteBlog} element={<BlogDetails />} />
-              <Route path={RouteBlogAdd} element={<AddBlog />} />
-              <Route path={RouteBlogEdit()} element={<EditBlog />} />
               <Route path={RouteBlogDetails()} element={<SingleBlogDetail />} />
               <Route
                 path={RouteBlogByCategory()}
                 element={<BlogByCategory />}
               />
               <Route path={RouteBlogSearch()} element={<SearchResult />} />
+
+              <Route element={<AuthRouteProtection />}>
+                <Route path={RouteBlog} element={<BlogDetails />} />
+                <Route path={RouteBlogAdd} element={<AddBlog />} />
+                <Route path={RouteBlogEdit()} element={<EditBlog />} />
+                <Route path={RouteComment} element={<Comment />} />
+                <Route path={RouteProfile} element={<Profile />} />
+              </Route>
+
+              <Route element={<OnlyAdminAllow />}>
+                <Route path={RouteUser} element={<User />} />
+                <Route
+                  path={RouteCategoryDetails}
+                  element={<CategoryDetails />}
+                />
+                <Route path={RouteAddCategory} element={<AddCategory />} />
+                <Route path={RouteEditCategory()} element={<EditCategory />} />
+              </Route>
             </Route>
 
             <Route path={RouteSignUp} element={<SignUp />} />

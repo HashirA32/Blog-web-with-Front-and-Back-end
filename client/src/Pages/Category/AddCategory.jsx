@@ -19,8 +19,10 @@ import { useEffect } from "react";
 import slugify from "slugify";
 import { showToast } from "@/components/Helper/showToast";
 import { getEnv } from "@/components/Helper/getenv";
+import { useSelector } from "react-redux";
 
 const AddCategory = () => {
+  const user = useSelector((state) => state.user);
   const formSchema = z.object({
     name: z.string().min(3, "Name must be at least 3 character long."),
     slug: z.string().min(3, "Slug must be at least 3 character long."),
@@ -47,6 +49,7 @@ const AddCategory = () => {
         `${getEnv("VITE_API_BASE_URL")}/category/add`,
         {
           method: "post",
+          credentials: "include",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(values),
         }
@@ -61,6 +64,7 @@ const AddCategory = () => {
       showToast("error", error.message);
     }
   }
+  console.log(user);
   return (
     <div className="">
       <Card className="p-5 max-w-screen-md mx-auto">

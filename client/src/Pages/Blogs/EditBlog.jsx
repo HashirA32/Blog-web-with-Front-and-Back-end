@@ -45,14 +45,14 @@ const EditBlog = () => {
     `${getEnv("VITE_API_BASE_URL")}/category/all-categories`,
     {
       method: "get",
-      Credential: "include",
+      credentials: "include",
     }
   );
   const { data: blogData, loading: blogLoading } = useFetch(
     `${getEnv("VITE_API_BASE_URL")}/blog/edit/${blogid}`,
     {
       method: "get",
-      Credential: "include",
+      credentials: "include",
     },
     [blogid]
   );
@@ -75,7 +75,7 @@ const EditBlog = () => {
       blogContent: "",
     },
   });
-  console.log(blogData);
+
   useEffect(() => {
     if (blogData) {
       setPreview(blogData.blog.featureImage);

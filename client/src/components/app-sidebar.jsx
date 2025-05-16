@@ -24,8 +24,10 @@ import {
 } from "./Helper/RouteNames";
 import { useFetch } from "@/hooks/UseFetch";
 import { getEnv } from "./Helper/getenv";
+import { useSelector } from "react-redux";
 
 const AppSidebar = () => {
+  const user = useSelector((state) => state.user);
   const { data: CategoryData } = useFetch(
     `${getEnv("VITE_API_BASE_URL")}/category/all-categories`,
     {
@@ -47,30 +49,45 @@ const AppSidebar = () => {
                 <Link to="/"> Home</Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <BiCategory />
-                <Link to={RouteCategoryDetails}>Categories</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <ImBlog />
-                <Link to={RouteBlog}>Blogs</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <FaRegComments />
-                <Link to={RouteComment}>Comments</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <FiUsers />
-                <Link to={RouteUser}>User</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+
+            {user && user.isLoggedIn ? (
+              <>
+                <SidebarMenuItem>
+                  <SidebarMenuButton>
+                    <ImBlog />
+                    <Link to={RouteBlog}>Blogs</Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton>
+                    <FaRegComments />
+                    <Link to={RouteComment}>Comments</Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {user && user.user.role === "admin" ? (
+              <>
+                <SidebarMenuItem>
+                  <SidebarMenuButton>
+                    <BiCategory />
+                    <Link to={RouteCategoryDetails}>Categories</Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+
+                <SidebarMenuItem>
+                  <SidebarMenuButton>
+                    <FiUsers />
+                    <Link to={RouteUser}>User</Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </>
+            ) : (
+              <></>
+            )}
           </SidebarMenu>
         </SidebarGroup>
 
@@ -83,7 +100,7 @@ const AppSidebar = () => {
               CategoryData.categories.map((category) => (
                 <SidebarMenuItem key={category._id}>
                   <SidebarMenuButton>
-                    <IoHomeOutline />
+                    <BiCategory />
                     <Link to={RouteBlogByCategory(category.slug)}>
                       {category.name}
                     </Link>

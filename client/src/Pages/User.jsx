@@ -30,10 +30,10 @@ const User = () => {
   const { data, loading, error } = useFetch(
     `${getEnv("VITE_API_BASE_URL")}/user/get-all-user`,
     {
-      method: "get",
-      Credential: "include",
+      method: "GET",
+      credentials: "include",
     },
-    [refreshData]
+    [refreshData] // dependencies for re-fetching
   );
 
   const handleDelete = (id) => {
@@ -47,7 +47,6 @@ const User = () => {
       showToast("error", "Data not Deleted");
     }
   };
-  console.log(data);
   if (loading) return <Loading />;
   return (
     <div>

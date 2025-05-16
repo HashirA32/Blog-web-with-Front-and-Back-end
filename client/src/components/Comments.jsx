@@ -45,6 +45,7 @@ const Comments = ({ props }) => {
         `${getEnv("VITE_API_BASE_URL")}/comment/add`,
         {
           method: "post",
+          credentials: "include",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(newValues),
         }

@@ -35,11 +35,11 @@ export const LogIn = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-        return next(handleError(404, 'Invalid login credentials'));
-      }
-      
+      return next(handleError(404, "Invalid login credentials"));
+    }
+
     const hashedPassword = user.password;
-    const comparePassword = await bcryptjs.compare(password, hashedPassword);
+    const comparePassword = bcryptjs.compare(password, hashedPassword);
     if (!comparePassword) {
       return next(handleError(401, "Invalid login credentials."));
     }
@@ -50,6 +50,7 @@ export const LogIn = async (req, res, next) => {
         name: user.name,
         email: user.email,
         avatar: user.avatar,
+        role: user.role,
       },
       process.env.JWT_SECRET
     );
@@ -97,6 +98,7 @@ export const GoogleLogIn = async (req, res, next) => {
         name: user.name,
         email: user.email,
         avatar: user.avatar,
+        role: user.role, 
       },
       process.env.JWT_SECRET
     );
@@ -120,18 +122,15 @@ export const GoogleLogIn = async (req, res, next) => {
   }
 };
 
-
-
 export const Loguot = async (req, res, next) => {
   try {
-    res.clearCookie("access_token",{
+    res.clearCookie("access_token", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       path: "/",
     });
 
-   
     res.status(200).json({
       success: true,
       message: "Logout successful.",

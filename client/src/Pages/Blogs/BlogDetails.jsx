@@ -30,7 +30,7 @@ const BlogDetails = () => {
     `${getEnv("VITE_API_BASE_URL")}/blog/get-all`,
     {
       method: "get",
-      Credential: "include",
+      credentials: "include",
     },
     [refreshData]
   );

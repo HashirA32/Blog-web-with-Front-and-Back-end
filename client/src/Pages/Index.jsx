@@ -9,9 +9,9 @@ const Index = () => {
     data: blogData,
     loading,
     error,
-  } = useFetch(`${getEnv("VITE_API_BASE_URL")}/blog/get-all`, {
+  } = useFetch(`${getEnv("VITE_API_BASE_URL")}/blog/get-all-blog-home`, {
     method: "get",
-    Credential: "include",
+    credentials: "include",
   });
   if (loading) return <Loading />;
   return (

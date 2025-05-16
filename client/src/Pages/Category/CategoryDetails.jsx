@@ -34,7 +34,7 @@ const CategoryDetails = () => {
     `${getEnv("VITE_API_BASE_URL")}/category/all-categories`,
     {
       method: "get",
-      Credential: "include",
+      credentials: "include",
     },
     [refreshData]
   );

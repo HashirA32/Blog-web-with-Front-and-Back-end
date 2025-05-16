@@ -31,7 +31,7 @@ const Comment = () => {
     `${getEnv("VITE_API_BASE_URL")}/comment/get-all-comment`,
     {
       method: "get",
-      Credential: "include",
+      credentials: "include",
     },
     [refreshData]
   );

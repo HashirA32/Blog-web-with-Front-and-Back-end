@@ -31,7 +31,7 @@ const EditCategory = () => {
     `${getEnv("VITE_API_BASE_URL")}/category/show/${category_id}`,
     {
       method: "get",
-      Credential: "include",
+      credentials: "include",
     },
     [category_id]
   );
