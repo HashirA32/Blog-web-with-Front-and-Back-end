@@ -47,7 +47,7 @@ const Comment = () => {
       showToast("error", "Data not Deleted");
     }
   };
-  console.log(data);
+
   if (loading) return <Loading />;
   return (
     <div>

@@ -2,7 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaSignInAlt } from "react-icons/fa";
 import { Button } from "./ui/button";
 import SearchBar from "./SearchBar";
-import { RouteIndex, RouteProfile, RouteSignIn } from "./Helper/RouteNames";
+import {
+  RouteBlogAdd,
+  RouteIndex,
+  RouteProfile,
+  RouteSignIn,
+} from "./Helper/RouteNames";
 import { ModeToggle } from "./mode-toggle";
 import {
   DropdownMenu,
@@ -94,7 +99,7 @@ const Topbar = () => {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild className="cursor-pointer">
-                <Link to="">
+                <Link to={RouteBlogAdd}>
                   <IoMdAdd />
                   <p>Add blog</p>
                 </Link>

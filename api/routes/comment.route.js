@@ -8,7 +8,7 @@ const CommentRoute = express.Router()
 CommentRoute.post('/add',authenticate,addComment)
 CommentRoute.get('/get/:blogid',showComment)
 CommentRoute.get('/get-count/:blogid',CommentCount)
-CommentRoute.get('/get-all-comment',getAllComment)
+CommentRoute.get('/get-all-comment',authenticate ,getAllComment)
 CommentRoute.delete('/delete/:commentid',authenticate,deleteComment)
 
 
