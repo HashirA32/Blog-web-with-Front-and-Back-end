@@ -1,5 +1,4 @@
 import React from "react";
-import LoadingIcon from "@/assets/images/Loading.svg";
 const Loading = () => {
   return (
     <div className="relative w-full h-[60dvh]">
