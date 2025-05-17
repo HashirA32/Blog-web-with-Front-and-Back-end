@@ -17,10 +17,26 @@ const app = express()
 
 app.use(cookieParser())
 app.use(express.json())
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL // Add your main production URL if needed
+];
+
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true
-}))
+  origin: function (origin, callback) {
+    if (
+      !origin || 
+      allowedOrigins.includes(origin) || 
+      origin.endsWith(".vercel.app")
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS: " + origin));
+    }
+  },
+  credentials: true
+}));
+
 app.use((req, res, next) => {
     res.removeHeader('Cross-Origin-Opener-Policy');
     next();
