@@ -43,7 +43,7 @@ const BlogCard = ({ props }) => {
           </div>
 
           <div>
-            <p className="flex justify-end items-center gap-1 py-1 text-sm">
+            <p className="flex justify-end items-center gap-1.5 py-1 text-sm">
               <BsCalendar3 />:
               <span>{moment(props.createdAt).format("DD-MM-YYYY")}</span>
             </p>
