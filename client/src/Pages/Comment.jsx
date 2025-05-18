@@ -1,10 +1,5 @@
-import {
-  RouteAddCategory,
-  RouteEditCategory,
-} from "@/components/Helper/RouteNames";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 import React from "react";
 import {
   Table,
@@ -18,7 +13,6 @@ import {
 import { useFetch } from "@/hooks/UseFetch";
 import { getEnv } from "@/components/Helper/getenv";
 import Loading from "@/components/Loading";
-import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { deleteData } from "@/components/Helper/handleDelete";
 import { showToast } from "@/components/Helper/showToast";

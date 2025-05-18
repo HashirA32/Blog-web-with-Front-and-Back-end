@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import cookieParser from 'cookie-parser'
+import cookieParser from "cookie-parser";
 import cors from 'cors'
 import mongoose from 'mongoose'
 import AuthRoute from './routes/Auth.route.js'
@@ -19,8 +19,9 @@ app.use(cookieParser())
 app.use(express.json())
 const allowedOrigins = [
   "http://localhost:5173",
-  process.env.FRONTEND_URL // Add your main production URL if needed
-];
+  process.env.FRONTEND_URL,
+  'https://blog-web-with-front-and-back-end-y27x.vercel.app', // Add your main production URL if needed
+]; 
 
 app.use(cors({
   origin: function (origin, callback) {
