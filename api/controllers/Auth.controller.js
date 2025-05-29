@@ -7,12 +7,11 @@ export const Register = async (req, res, next) => {
     const { name, email, password } = req.body;
     const checkuser = await User.findOne({ email });
     if (checkuser) {
-      // user already registered
+  
       next(handleError(409, "User already registered."));
     }
 
-    const hashedPassword = bcryptjs.hashSync(password);
-    // register user
+    const hashedPassword = bcryptjs.hashSync(password);    
     const user = new User({
       name,
       email,

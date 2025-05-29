@@ -1,5 +1,5 @@
 import { handleError } from "../helpers/handleError.js";
-import User from "../models/user.model.js";// make sure you import your User model
+import User from "../models/user.model.js";
 import bcryptjs from 'bcryptjs' 
 import cloudinary from '../config/Cloudnary.js'
 
@@ -17,7 +17,7 @@ export const getUser = async (req, res, next) => {
       message: "Got user data.",
       user,
     });
-  } catch (error) {  // <-- Important: 'catch(error)'
+  } catch (error) { 
     next(handleError(500, error.message));
   }
 };
@@ -39,7 +39,7 @@ export const updateUser = async (req, res, next) => {
       user.password = hashedPassword
     }
     if(req.file){
-      // Upload an image
+    
      const uploadResult = await cloudinary.uploader
      .upload(
       req.file.path,

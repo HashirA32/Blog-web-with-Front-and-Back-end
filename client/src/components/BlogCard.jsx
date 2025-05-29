@@ -33,7 +33,6 @@ const BlogCard = ({ props }) => {
             </div>
           </div>
 
-          {/* Feature image section with fixed size and cover styling */}
           <div className="w-full h-48 overflow-hidden rounded-2xl border">
             <img
               src={props.featureImage}

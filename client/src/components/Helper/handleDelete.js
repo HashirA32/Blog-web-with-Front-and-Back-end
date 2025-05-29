@@ -11,12 +11,12 @@ export const deleteData = async (endPoint) => {
         });
 
         if (!response.ok) {
-            // If the server responded with a non-OK status, throw an error with details
+            
             const errorText = await response.text();
             throw new Error(`Error ${response.status}: ${errorText}`);
         }
 
-        // Only try to parse JSON if the response is OK
+        
         const data = await response.json();
         console.log('Delete successful:', data);
 

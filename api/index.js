@@ -20,7 +20,7 @@ app.use(express.json())
 const allowedOrigins = [
   "http://localhost:5173",
   process.env.FRONTEND_URL,
-  'https://blog-web-with-front-and-back-end-y27x.vercel.app', // Add your main production URL if needed
+  'https://blog-web-with-front-and-back-end-y27x.vercel.app',
 ]; 
 
 app.use(cors({

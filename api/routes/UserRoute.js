@@ -1,7 +1,6 @@
 import express from 'express'
 import { deleteUser, getAllUser, getUser, updateUser } from '../controllers/User.controllers.js'
 import upload from '../config/multer.js'
-// import { onlyadminauthenticate } from '../middleware/onlyAdminAuthenticate.js'
 import { authenticate } from '../middleware/authenticate.js'
 
 

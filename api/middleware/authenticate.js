@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { handleError } from '../helpers/handleError.js'; // Adjust path as needed
+import { handleError } from '../helpers/handleError.js'; 
 
 export const authenticate = (req, res, next) => {
   try {

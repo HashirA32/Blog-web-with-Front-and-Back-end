@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { FcGoogle } from "react-icons/fc";
-import { signInWithPopup } from "firebase/auth"; // keep popup
+import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "./Helper/firebase";
 import { RouteIndex } from "./Helper/RouteNames";
 import { showToast } from "./Helper/showToast";

@@ -28,14 +28,14 @@ import { showToast } from "./Helper/showToast";
 import { removeUser } from "@/redux/user/user.slice";
 import { getEnv } from "./Helper/getenv";
 import { IoMdSearch } from "react-icons/io";
-import React, { useState } from "react"; // ✅ Added useState
+import React, { useState } from "react";
 import { SidebarTrigger } from "./ui/sidebar";
 
 const Topbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showMobileSearch, setShowMobileSearch] = useState(false); // ✅ Toggle for mobile search
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -61,7 +61,6 @@ const Topbar = () => {
   return (
     <>
       <nav className="w-full flex items-center justify-between px-3 md:px-6 py-3 shadow-sm h-16 fixed z-50 border-b bg-background/10 backdrop-blur top-0">
-        {/* Logo */}
         <Link to={RouteIndex}>
           <div className="flex items-center space-x-2 font-bold text-xl">
             <SidebarTrigger className="md:hidden" />
@@ -70,13 +69,10 @@ const Topbar = () => {
           </div>
         </Link>
 
-        {/* Search - visible on desktop */}
         <div className="hidden md:block w-full max-w-md mx-4">
           <SearchBar />
         </div>
 
-        {/* Mobile search icon */}
-        {/* Sign In / Profile */}
         <div className="flex gap-2 items-center">
           <div className="md:hidden flex items-center">
             <button
@@ -134,7 +130,6 @@ const Topbar = () => {
         </div>
       </nav>
 
-      {/* Mobile SearchBar - below nav */}
       {showMobileSearch && (
         <div className="md:hidden  px-4 py-2 bg-background shadow z-40 mt-16 fixed w-full">
           <SearchBar />

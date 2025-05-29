@@ -49,7 +49,7 @@ const LikeCount = ({ props }) => {
         }
       );
 
-      const responseData = await response.json(); // move this up
+      const responseData = await response.json();
 
       if (!response.ok) {
         return showToast(

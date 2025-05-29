@@ -33,7 +33,7 @@ const User = () => {
       method: "GET",
       credentials: "include",
     },
-    [refreshData] // dependencies for re-fetching
+    [refreshData]
   );
 
   const handleDelete = (id) => {
