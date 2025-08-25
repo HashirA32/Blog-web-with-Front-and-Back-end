@@ -29,11 +29,11 @@ import {
 import { useFetch } from "@/hooks/UseFetch";
 import Dropzone from "react-dropzone";
 import { useState } from "react";
-import Editer from "@/components/Editer";
 import { useSelector } from "react-redux";
 import { RouteBlog } from "@/components/Helper/RouteNames";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "@/components/Loading";
+import { Textarea } from "@/components/ui/textarea";
 
 const EditBlog = () => {
   const { blogid } = useParams();
@@ -225,12 +225,7 @@ const EditBlog = () => {
                     <FormItem>
                       <FormLabel>Blog Content</FormLabel>
                       <FormControl>
-                        <Editer
-                          props={{
-                            initialData: field.value,
-                            onChange: handleEditerData,
-                          }}
-                        />
+                        <Textarea placeholder="Enter content" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

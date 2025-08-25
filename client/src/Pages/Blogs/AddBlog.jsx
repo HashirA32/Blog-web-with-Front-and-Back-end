@@ -33,7 +33,7 @@ import Editer from "@/components/Editer";
 import { useSelector } from "react-redux";
 import { RouteBlog } from "@/components/Helper/RouteNames";
 import { useNavigate } from "react-router-dom";
-
+import { Textarea } from "@/components/ui/textarea";
 const AddBlog = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
@@ -54,7 +54,7 @@ const AddBlog = () => {
     slug: z.string().min(3, "Slug must be at least 3 character long."),
     blogContent: z
       .string()
-      .min(50, "Blog Content must be at least 50 character long."),
+      .min(5, "Blog Content must be at least 5 character long."),
   });
 
   const form = useForm({
@@ -66,10 +66,10 @@ const AddBlog = () => {
       blogContent: "",
     },
   });
-  const handleEditerData = (event, editor) => {
-    const data = editor.getData();
-    form.setValue("blogContent", data);
-  };
+  // const handleEditerData = (event, editor) => {
+  //   const data = editor.getData();
+  //   form.setValue("blogContent", data);
+  // };
   const blogTitle = form.watch("title");
   useEffect(() => {
     if (blogTitle) {
@@ -206,12 +206,7 @@ const AddBlog = () => {
                     <FormItem>
                       <FormLabel>Blog Content</FormLabel>
                       <FormControl>
-                        <Editer
-                          props={{
-                            initialData: "",
-                            onChange: handleEditerData,
-                          }}
-                        />
+                        <Textarea placeholder="Enter content" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -231,3 +226,9 @@ const AddBlog = () => {
 };
 
 export default AddBlog;
+//  <Editer
+//    props={{
+//      initialData: "",
+//      onChange: handleEditerData,
+//    }}
+//  />;
