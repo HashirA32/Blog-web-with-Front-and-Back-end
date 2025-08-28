@@ -66,10 +66,7 @@ const AddBlog = () => {
       blogContent: "",
     },
   });
-  // const handleEditerData = (event, editor) => {
-  //   const data = editor.getData();
-  //   form.setValue("blogContent", data);
-  // };
+
   const blogTitle = form.watch("title");
   useEffect(() => {
     if (blogTitle) {
@@ -226,9 +223,3 @@ const AddBlog = () => {
 };
 
 export default AddBlog;
-//  <Editer
-//    props={{
-//      initialData: "",
-//      onChange: handleEditerData,
-//    }}
-//  />;
