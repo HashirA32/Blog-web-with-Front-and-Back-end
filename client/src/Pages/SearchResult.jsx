@@ -18,7 +18,6 @@ const SearchResult = () => {
     },
     [searchParams]
   );
-  console.log(blogData);
   return (
     <>
       <div className="flex items-center gap-2 text-2xl font-bold border-b pb-2 mb-5 text-orange-400">
